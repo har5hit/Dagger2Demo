@@ -1,18 +1,17 @@
 package com.justadeveloper96.gallery.list
 
-import android.arch.lifecycle.LifecycleRegistry
-import android.arch.lifecycle.LifecycleRegistryOwner
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import com.justadeveloper96.gallery.MyApplication
 import com.justadeveloper96.gallery.R
 import com.justadeveloper96.gallery.list.db.MyData
-import com.justadeveloper96.helpers.helpers.RetrofitModule
+import com.justadeveloper96.helpers.Module.SharedPrefs
+import com.justadeveloper96.helpers.Module.Utils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,19 +19,18 @@ import retrofit2.Retrofit
 import javax.inject.Inject
 
 
-class MainActivity : MyActivity(), SwipeRefreshLayout.OnRefreshListener, LifecycleRegistryOwner {
-    override fun getLifecycle(): LifecycleRegistry =mRegistry
-
-    private val mRegistry by lazy { LifecycleRegistry(this) }
+class MainActivity : MyActivity(), SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
-    lateinit var retrofit: Retrofit
+    public lateinit var retrofit: Retrofit
+
+    @Inject
+    public lateinit var sharedPrefs: SharedPrefs
 
     override fun onRefresh() {
         netcall()
     }
 
-    private var registry = null
     private val vm by lazy{ViewModelProviders.of(this).get(DataViewModel::class.java) as DataViewModel}
     private val rv by lazy{findViewById(R.id.recycler_view) as RecyclerView}
     private val swipe by lazy{findViewById(R.id.swipe) as SwipeRefreshLayout}
@@ -48,6 +46,11 @@ class MainActivity : MyActivity(), SwipeRefreshLayout.OnRefreshListener, Lifecyc
 
         swipe.setOnRefreshListener(this)
 
+        (applicationContext as MyApplication).getmHelperComponent().inject(this)
+
+
+        Utils.showToast(this," ${sharedPrefs.getInt("count")} times");
+        sharedPrefs.save("count",sharedPrefs.getInt("count")+1);
         val mLayoutManager = LinearLayoutManager(applicationContext)
         rv.setLayoutManager(mLayoutManager)
         rv.setItemAnimator(DefaultItemAnimator())
@@ -64,6 +67,8 @@ class MainActivity : MyActivity(), SwipeRefreshLayout.OnRefreshListener, Lifecyc
             }
         })
     }
+
+
 
 
     fun netcall() {

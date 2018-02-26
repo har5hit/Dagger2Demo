@@ -1,8 +1,7 @@
-package com.justadeveloper96.helpers.helpers;
+package com.justadeveloper96.helpers.Module;
 
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;

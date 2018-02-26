@@ -1,4 +1,4 @@
-package com.justadeveloper96.helpers.helpers;
+package com.justadeveloper96.helpers.Module;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -51,8 +51,6 @@ import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
-import javax.inject.Inject;
 
 
 /**

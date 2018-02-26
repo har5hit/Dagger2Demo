@@ -1,19 +1,17 @@
-/*
 package com.justadeveloper96.gallery;
 
-import com.justadeveloper96.helpers.helpers.AppModule
-import dagger.Component;
-import javax.inject.Singleton;
+import com.justadeveloper96.gallery.list.MainActivity;
+import com.justadeveloper96.helpers.Module.AppModule;
+import com.justadeveloper96.helpers.Module.RetrofitModule;
 
-*/
-/**
- * Created by user on 2/23/2018.
- *//*
+import dagger.Component;
+
+import javax.inject.Singleton;
 
 
 @Singleton
-@Component(modules = AppModule.class)
+@Component(modules = {AppModule.class, RetrofitModule.class})
 public interface AppComponent {
-    public void inject(MyApplication app);
+
+    void inject(MainActivity app);
 }
-*/

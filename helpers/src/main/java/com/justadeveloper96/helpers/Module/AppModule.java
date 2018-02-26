@@ -1,9 +1,8 @@
-package com.justadeveloper96.helpers.helpers;
+package com.justadeveloper96.helpers.Module;
 
 import android.app.Application;
 import android.content.Context;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -14,7 +13,6 @@ import dagger.Provides;
  */
 @Module
 public class AppModule {
-
     Application mApp;
 
     public AppModule(Application application)
@@ -32,5 +30,12 @@ public class AppModule {
     @Singleton
     public Application provideAppInstance() {
         return mApp;
+    }
+
+
+    @Provides
+    @Singleton
+    SharedPrefs provideSharedPrefs() {
+        return new SharedPrefs(mApp);
     }
 }

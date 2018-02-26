@@ -26,7 +26,7 @@ android {
 ext{
     retrofitVersion='2.3.0'
     okhttpVersion='3.9.1'
-    daggerVersion='2.13'
+    daggerVersion='2.8'
     androidLibVersion='26.1.0'
     archComponentVersion='1.0.0'
 }
@@ -51,6 +51,10 @@ dependencies {
 
     api "com.google.dagger:dagger:$daggerVersion"
     //api "com.google.dagger:dagger-android-support:$daggerVersion"
+
+    compileOnly 'javax.annotation:jsr250-api:1.0'
+    api 'javax.inject:javax.inject:1'
+
 
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 

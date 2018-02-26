@@ -1,4 +1,4 @@
-package com.justadeveloper96.helpers.helpers;
+package com.justadeveloper96.helpers.Module;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,14 +6,11 @@ import android.content.SharedPreferences;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import dagger.Module;
-import dagger.Provides;
-
 /**
  * Created by harshith on 20/1/17.
  */
 
-@Module(includes = AppModule.class)
+@Singleton
 public class SharedPrefs {
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
@@ -62,13 +59,6 @@ public class SharedPrefs {
     public void logout()
     {
         editor.clear().commit();
-    }
-
-    @Provides
-    @Singleton
-    public SharedPrefs providePrefs(SharedPrefs sharedPrefs)
-    {
-        return sharedPrefs;
     }
 
     public void setPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener)
